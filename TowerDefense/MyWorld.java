@@ -16,6 +16,7 @@ public class MyWorld extends World
     private final int cellSize = 20;
 
     private Set<Location> locations = new HashSet();
+    private Map distanceMap;
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -35,6 +36,8 @@ public class MyWorld extends World
                 }
             }
         }
+
+        distanceMap = FastMarching.use(this);
     }
     
     public void init(){
@@ -57,9 +60,12 @@ public class MyWorld extends World
         return locations;
     }
 
+    public Map getMap() {
+        return distanceMap;
+    }
+
     public void printDistanceField(){
-        Map result = FastMarching.use(this);
-        System.out.println(StringView.toStringDistanceMap(result));
+        System.out.println(StringView.toStringDistanceMap(distanceMap));
     }
     
     public void printField(){
