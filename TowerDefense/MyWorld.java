@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -11,7 +12,7 @@ import java.util.HashSet;
  */
 public class MyWorld extends World
 {
-    private Location goal;
+    private Location goal = new Location(5,5);
     private final int cellSize = 20;
 
     private Set<Location> locations = new HashSet();
@@ -22,21 +23,26 @@ public class MyWorld extends World
     public MyWorld()
     {    
         super(200, 200, 1);
+        init();
     }
 
     public void calculateField(){
-        System.out.println("HEY: " + getObjects(Actor.class));
         locations.clear();
         for (int x = 0; x < getWidth()/getTowerCellSize(); x++){
             for (int y = 0; y < getHeight()/getTowerCellSize(); y++){
-                //System.out.println("X: " + (x*getTowerCellSize() + getTowerCellSize()/2) + " - Y: " + (y*getTowerCellSize() + getTowerCellSize()/2));
                 if(getObjectsAt(x*getTowerCellSize() + getTowerCellSize()/2, y*getTowerCellSize() + getTowerCellSize()/2, null).isEmpty()){
                     locations.add(Location.of(x,y));
-                } else {
-                    System.out.println("HEY BOI");
                 }
             }
         }
+    }
+    
+    public void init(){
+        this.goal = new Location(5,5);
+    }
+    
+    private void setGoal(Location goal){
+        this.goal = goal;
     }
     
     public Location getGoal(){
@@ -49,5 +55,14 @@ public class MyWorld extends World
 
     public Set<Location> getLocations() {
         return locations;
+    }
+
+    public void printDistanceField(){
+        Map result = FastMarching.use(this);
+        System.out.println(StringView.toStringDistanceMap(result));
+    }
+    
+    public void printField(){
+        System.out.println(StringView.toStringMap(this));
     }
 }
