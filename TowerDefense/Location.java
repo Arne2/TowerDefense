@@ -1,7 +1,7 @@
 /**
  * Provides a simple value object for a location.
  *
- * @author arne2
+ * @author peter-mueller
  */
 public class Location implements Comparable<Location> {
 

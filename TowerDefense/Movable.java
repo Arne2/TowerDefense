@@ -51,6 +51,11 @@ public class Movable extends Actor
     public double getYPos() {
         return y;
     }
+    
+    public void setPos(){
+        x = getX();
+        y = getY();
+    }
 
     /**
      * Act - do whatever the Movable wants to do. This method is called whenever
