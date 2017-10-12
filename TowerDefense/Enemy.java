@@ -36,7 +36,7 @@ public class Enemy extends Movable
         int x = getX()/cellsize;
         int y = getY()/cellsize;
         Location location = Location.of(x,y);
-        System.out.println("X: " + x + " Y: " + y);
+        //System.out.println("X: " + x + " Y: " + y);
         
         
         // Remove if already at goal
@@ -92,13 +92,14 @@ public class Enemy extends Movable
             dir = Direction.RIGHT_DOWN;
             best = tmp;
         }
+        //System.out.println(dir.name() + " - " + best);
         return dir.getDirection();
     }
     
     private Double getValue(int x, int y){
         Double result = getMap().get(Location.of(x,y));
         if(result == null){
-            return new Double(Double.MIN_VALUE);
+            return new Double(-Double.MAX_VALUE);
         }
         return result;
     }
