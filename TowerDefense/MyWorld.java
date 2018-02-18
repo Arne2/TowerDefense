@@ -16,7 +16,7 @@ public class MyWorld extends World
 {
     private Location goal = new Location(5,5);
     private final int cellSize = 20;
-    private static final int MENUSIZE = 20;
+    private static final int MENUSIZE = 100;
     private List<EnemySpawn> spawns = new ArrayList();
 
     private Set<Location> locations = new HashSet();
@@ -31,7 +31,7 @@ public class MyWorld extends World
      */
     public MyWorld()
     {    
-        super(800, 600, 1);
+        super(800, 800, 1);
         init();
         calculateField();
     }
@@ -69,7 +69,7 @@ public class MyWorld extends World
     public void buildBorder(){
         for(int x = getTowerCellSize()/2; x < getWidth(); x+=getTowerCellSize()){
             if( x == getTowerCellSize()/2 || x == getWidth() - getTowerCellSize()/2){
-                for(int y = MENUSIZE; y < getHeight() - MENUSIZE; y+=getTowerCellSize()){
+                for(int y = MENUSIZE; y <= getHeight() - MENUSIZE; y+=getTowerCellSize()){
                     addObject(new Wall(), x, y);
                 }
             } else {

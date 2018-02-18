@@ -16,11 +16,17 @@ public class FastMarching {
     private final Map<Location, Double> distance = new HashMap<>();
     private final Set<Location> unvisited;
     private final Map<Location, Double> considered = new HashMap<>();
+    private boolean debug;
 
-    private FastMarching(MyWorld world_, Location target_) {
+    private FastMarching(MyWorld world_, Location target_, boolean debug) {
+        this.debug = debug;
         this.world = world_;
         this.target = target_;
         this.unvisited = new HashSet<>(world.getLocations());
+    }
+    
+    private FastMarching(MyWorld world_, Location target_){
+        this(world_, target_, false);
     }
 
     /**
@@ -193,7 +199,7 @@ public class FastMarching {
             distance.put(dist.getKey(), dist.getValue());
         }
 
-        if(unvisited.isEmpty() != true){
+        if(debug && unvisited.isEmpty() != true){
 
             System.out.println("unvisited nodes detected");
             for (Location loc:unvisited) {
